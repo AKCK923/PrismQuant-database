@@ -12,8 +12,8 @@ This repository contains **database structure only**:
 - a structural smoke test
 
 It is **not** connected to A1／A2／A3／A4／A5, the web app, or any existing
-application storage. It does not replace SQLite／PostgreSQL and it is not a
-production deployment.
+application storage. It does not replace the existing application storage and
+it is not a production deployment.
 
 ## Requirements
 
