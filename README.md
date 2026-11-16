@@ -166,23 +166,4 @@ Mermaid 原始碼在 `docs/relationships.mmd`。
 └─ .github/workflows/smoke.yml
 ```
 
-## 發佈到 GitHub
 
-如果這個 repo 還沒建立：
-
-```bash
-git init
-git add .
-git commit -m "Create PrismQuant MongoDB database shell"
-gh repo create prismquant-db-shell --public --source . --remote origin --push
-```
-
-或者在 GitHub 建立一個空 repo，然後：
-
-```bash
-git remote add origin https://github.com/<account>/prismquant-db-shell.git
-git branch -M main
-git push -u origin main
-```
-
-不要把 `.env`、資料庫檔案、log 或真實使用者資料 commit 進 repo。
