@@ -1,0 +1,38 @@
+name: smoke
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:8.0
+        ports:
+          - 27017:27017
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Wait for MongoDB
+        run: |
+          for i in $(seq 1 30); do
+            python -c "from pymongo import MongoClient; MongoClient('mongodb://127.0.0.1:27017', serverSelectionTimeoutMS=1000).admin.command('ping')" && exit 0
+            sleep 2
+          done
+          exit 1
+
+      - name: Initialize and test
+        run: |
+          python init_db.py
+          python seed_demo.py
+          python smoke_test.py
